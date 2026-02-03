@@ -10,3 +10,6 @@ Contains:
 
 Modify these values to tune system behavior without changing core logic.
 """
+
+MUSE_STREAM_NAME = "Muse-DF97"
+MAC_ADDRESS = "2B4C914C-27D1-B83C-2547-678EB30BA1E4"

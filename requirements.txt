@@ -3,3 +3,6 @@ pylsl
 numpy
 scipy
 pyserial
+vispy
+mne
+PyQt6

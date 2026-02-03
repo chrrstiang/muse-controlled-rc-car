@@ -11,3 +11,16 @@ Data streams:
 - EEG: 4 channels (TP9, AF7, AF8, TP10) at 256 Hz
 - Gyroscope: 3-axis accelerometer data for head movement
 """
+from muselsl import stream, list_muses
+
+muses = list_muses()
+
+if not muses:
+    print("No Muse devices found.")
+    exit(1)
+print(muses)
+
+print("Starting stream...")
+stream(muses[0]['address'], ppg_enabled=True, acc_enabled=True)
+
+print("Streaming is now over.")
