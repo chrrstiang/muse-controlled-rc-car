@@ -12,6 +12,7 @@ Data streams:
 - Gyroscope: 3-axis accelerometer data for head movement
 """
 from muselsl import stream, list_muses
+from config import MAC_ADDRESS
 
 muses = list_muses()
 
@@ -21,6 +22,6 @@ if not muses:
 print(muses)
 
 print("Starting stream...")
-stream(muses[0]['address'], ppg_enabled=True, acc_enabled=True)
+stream(MAC_ADDRESS, ppg_enabled=True, acc_enabled=True)
 
 print("Streaming is now over.")

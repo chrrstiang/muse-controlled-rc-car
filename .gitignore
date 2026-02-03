@@ -6,7 +6,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Data files
-data/recordings/*.csv
+data/recordings/training_*.csv
 data/recordings/*.npy
 
 # PlatformIO
