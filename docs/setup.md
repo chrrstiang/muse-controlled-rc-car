@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ```bash
 muselsl list
-# Should show your Muse device
+# Should show your Muse device (make sure headband is not connected to any other device)
 
 muselsl stream
 # Should start streaming data
@@ -77,7 +77,7 @@ Edit `python/config.py` to set:
 
 - Serial port name (from step above)
 - Focus detection thresholds (start with defaults)
-- Gyroscope sensitivity (start with defaults)
+- Accelerometer sensitivity (start with defaults)
 
 ## Troubleshooting
 
@@ -104,6 +104,6 @@ Edit `python/config.py` to set:
 Once setup is complete, proceed to:
 
 1. Calibration (see demo.md)
-2. Testing gyroscope control
+2. Testing accelerometer control
 3. Testing focus detection
 4. Full system integration
