@@ -1,0 +1,5 @@
+muse-lsl
+pylsl
+numpy
+scipy
+pyserial

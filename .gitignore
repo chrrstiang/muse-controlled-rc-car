@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Data files
+data/recordings/*.csv
+data/recordings/*.npy
+
+# PlatformIO
+arduino/.pio/
+arduino/.vscode/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
