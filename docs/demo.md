@@ -13,7 +13,7 @@
 ### 1. Activate Python Environment
 
 ```bash
-cd ~/bci-rc-car
+cd ~/muse-controlled-rc-car
 source venv/bin/activate
 ```
 

@@ -33,7 +33,7 @@
 3. **Python Environment**:
 
 ```bash
-cd ~/bci-rc-car
+cd ~/muse-controlled-rc-car
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
