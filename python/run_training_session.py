@@ -63,11 +63,11 @@ def run_training_session(session_name, trials):
 if __name__ == "__main__":
     # Example: Focus detection training session
     trials = [
-        {'type': 'focus', 'duration': 30, 'notes': 'Mental math (counting by 7s)'},
-        {'type': 'unfocus', 'duration': 30, 'notes': 'Eyes closed, relaxed'},
+        {'type': 'neutral', 'duration': 30, 'notes': 'Sit still, head facing forward, relaxed'},
+        {'type': 'focus', 'duration': 30, 'notes': 'Mental math (counting backwards by 7s)'},
         {'type': 'focus', 'duration': 30, 'notes': 'Visual focus on object'},
-        {'type': 'unfocus', 'duration': 30, 'notes': 'Mind wandering'},
-        {'type': 'focus', 'duration': 30, 'notes': 'Mental math again'},
+        {'type': 'unfocus', 'duration': 30, 'notes': 'Eyes closed, relaxed breathing, mind wandering'},
+        {'type': 'unfocus', 'duration': 30, 'notes': 'Eyes open, soft gaze, let thoughts drift'},
     ]
     
     run_training_session('training_001', trials)

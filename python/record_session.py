@@ -38,7 +38,7 @@ def record_session(duration=None, output_dir='data/recordings', notes=''):
     print("Looking for EEG stream...")
     eeg_streams = resolve_byprop('type', 'EEG', timeout=5)
     print("Looking for accelerometer stream...")
-    acc_streams = resolve_byprop('type', 'ACC', timeout=5)  # or 'ACC' depending on Muse
+    acc_streams = resolve_byprop('type', 'ACC', timeout=5) 
     
     if not eeg_streams:
         print("No EEG stream found!")

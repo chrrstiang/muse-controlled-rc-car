@@ -5,4 +5,6 @@ scipy
 pyserial
 vispy
 mne
+pandas
+matplotlib
 PyQt6
