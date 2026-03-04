@@ -14,3 +14,20 @@ Modify these values to tune system behavior without changing core logic.
 # Muse device & address, change this to your device if using a different one. Run muselsl list to find your device.
 MUSE_DEVICE_NAME = "Muse-DF97"
 MAC_ADDRESS = "2B4C914C-27D1-B83C-2547-678EB30BA1E4"
+
+# Focus detection thresholds (alpha/beta ratio cutoffs)
+FOCUS_THRESHOLD = 0.405
+CHECK_INTERVAL = 0.5
+SAMPLING_RATE = 256
+WINDOW_SIZE = 512
+
+# Steering (enabled only when focused)
+STEERING_ENABLED_WHEN = "focused"
+MAX_LEFT_STEERING_ANGLE = 30
+MAX_RIGHT_STEERING_ANGLE = 30
+STEERING_DEADZONE = 5
+
+# Safety
+UNFOCUS_STEERING = 90  # Center position when unfocused
+SMOOTH_TRANSITION = True  # Gradually return to center
+TRANSITION_TIME = 0.5  # Seconds to transition
