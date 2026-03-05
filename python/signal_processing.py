@@ -1,6 +1,7 @@
 from scipy import signal
 import numpy as np
 import matplotlib.pyplot as plt
+from config import SAMPLING_RATE
 
 # EEG Signal Processing Functions
 
@@ -43,37 +44,25 @@ def plot_raw_eeg(df, channel='AF7', duration=4, sampling_rate=256):
     plt.grid(True, alpha=0.3)
     plt.show()
 
-def calculate_ratios(df, channel='AF7', window_start=2, window_duration=2, sampling_rate=256):
-    """Calculate alpha/beta and theta/beta ratios for specified window."""
-    print(f"\n=== Frequency Band Ratios ===")
+def compute_abr(eeg_data, fs=SAMPLING_RATE):
+    """
+    Compute Alpha/Beta Ratio.
     
-    # Calculate sample indices for the window
-    start_sample = int(window_start * sampling_rate)
-    end_sample = int((window_start + window_duration) * sampling_rate)
+    Args:
+        eeg_data: 1D array of EEG values
+        fs: sampling frequency
     
-    # Extract window data
-    window_data = df[channel].iloc[start_sample:end_sample].values  # Convert to NumPy array
+    Returns:
+        abr: Alpha/Beta ratio
+        alpha_power: Alpha band power
+        beta_power: Beta band power
+    """
+    alpha_power = calculate_band_power(eeg_data, fs, band_range='alpha')
+    print(f"Alpha Power: {alpha_power}")
+
+    beta_power = calculate_band_power(eeg_data, fs, band_range='beta')
+    print("Beta Power: ", beta_power)
     
-    print(f"Analyzing {window_duration}s window starting at {window_start}s")
-    print(f"Channel: {channel}")
-    print(f"Samples in window: {len(window_data)}")
+    abr = alpha_power / beta_power if beta_power > 0 else 0
     
-    # Calculate band powers
-    theta_power = calculate_band_power(window_data, sampling_rate, 'theta')
-    alpha_power = calculate_band_power(window_data, sampling_rate, 'alpha')
-    beta_power = calculate_band_power(window_data, sampling_rate, 'beta')
-    
-    print(f"\nBand Powers:")
-    print(f"Theta (4-8 Hz): {theta_power:.6f}")
-    print(f"Alpha (8-13 Hz): {alpha_power:.6f}")
-    print(f"Beta (13-30 Hz): {beta_power:.6f}")
-    
-    # Calculate ratios
-    alpha_beta_ratio = alpha_power / beta_power
-    theta_beta_ratio = theta_power / beta_power
-    
-    print(f"\nRatios:")
-    print(f"Alpha/Beta Ratio: {alpha_beta_ratio:.3f}")
-    print(f"Theta/Beta Ratio: {theta_beta_ratio:.3f}")
-    
-    return alpha_beta_ratio, theta_beta_ratio
+    return abr, alpha_power, beta_power

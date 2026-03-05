@@ -4,33 +4,9 @@ Real-time focus detection using Alpha/Beta Ratio.
 
 from pylsl import StreamInlet, resolve_byprop
 import numpy as np
-from scipy import signal
 import time
-from config import FOCUS_THRESHOLD, CHECK_INTERVAL, WINDOW_SIZE, SAMPLING_RATE
-from signal_processing import calculate_band_power
-
-def compute_abr(eeg_data, fs=SAMPLING_RATE):
-    """
-    Compute Alpha/Beta Ratio.
-    
-    Args:
-        eeg_data: 1D array of EEG values
-        fs: sampling frequency
-    
-    Returns:
-        abr: Alpha/Beta ratio
-        alpha_power: Alpha band power
-        beta_power: Beta band power
-    """
-    alpha_power = calculate_band_power(eeg_data, fs, band_range='alpha')
-    print(f"Alpha Power: {alpha_power}")
-
-    beta_power = calculate_band_power(eeg_data, fs, band_range='beta')
-    print("Beta Power: ", beta_power)
-    
-    abr = alpha_power / beta_power if beta_power > 0 else 0
-    
-    return abr, alpha_power, beta_power
+from config import FOCUS_THRESHOLD, CHECK_INTERVAL, WINDOW_SIZE
+from signal_processing import compute_abr
 
 def main():
     print("=== Focus Detection System ===")
