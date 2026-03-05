@@ -22,6 +22,6 @@ if not muses:
 print(muses)
 
 print("Starting stream...")
-stream(MAC_ADDRESS, ppg_enabled=True, acc_enabled=True)
+stream(MAC_ADDRESS, ppg_enabled=True, acc_enabled=True, gyro_enabled=True)
 
 print("Streaming is now over.")

@@ -23,9 +23,9 @@ WINDOW_SIZE = 512
 
 # Steering (enabled only when focused)
 STEERING_ENABLED_WHEN = "focused"
-MAX_LEFT_STEERING_ANGLE = 30
-MAX_RIGHT_STEERING_ANGLE = 30
-STEERING_DEADZONE = 5
+MAX_LEFT_ANGLE = -25
+MAX_RIGHT_ANGLE = 25
+DEADZONE = 7.5
 
 # Safety
 UNFOCUS_STEERING = 90  # Center position when unfocused
