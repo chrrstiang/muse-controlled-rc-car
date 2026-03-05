@@ -36,8 +36,8 @@ def main():
     print("=== Focus Detection System ===")
     print(f"Metric: Alpha/Beta Ratio (ABR)")
     print(f"Threshold: {FOCUS_THRESHOLD}")
-    print(f"ABR < {FOCUS_THRESHOLD} = FOCUSED (steering enabled)")
-    print(f"ABR > {FOCUS_THRESHOLD} = UNFOCUSED (steering disabled)\n")
+    print(f"ABR < {FOCUS_THRESHOLD} = ALERT (steering enabled)")
+    print(f"ABR > {FOCUS_THRESHOLD} = DISTRACTED (steering disabled)\n")
     
     # Connect to EEG stream
     print("Looking for EEG stream...")
@@ -56,8 +56,6 @@ def main():
     last_check_time = time.time()
     
     print("Starting focus detection...")
-    print("Try focusing (mental math or stare at point)")
-    print("Try unfocusing (soft gaze, mind wander)")
     print("Press Ctrl+C to stop\n")
     
     try:
@@ -84,7 +82,7 @@ def main():
                         
                         # Classify
                         is_focused = abr < FOCUS_THRESHOLD
-                        status = "FOCUSED ✓" if is_focused else "UNFOCUSED ✗"
+                        status = "ALERT ✓" if is_focused else "DISTRACTED ✗"
                         
                         # Display
                         print(f"{status} | ABR: {abr:.3f} | Alpha: {alpha:.2e} | Beta: {beta:.2e}")
