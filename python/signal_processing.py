@@ -2,6 +2,8 @@ from scipy import signal
 import numpy as np
 import matplotlib.pyplot as plt
 
+# EEG Signal Processing Functions
+
 def calculate_band_power(data, sampling_rate, band_range):
     """Calculate power in specific frequency band using Welch's method."""
     # Define frequency bands
