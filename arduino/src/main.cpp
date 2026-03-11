@@ -14,7 +14,7 @@
 #define MOTOR_IN4 10  // Right motor direction
 
 // ==================== CONFIGURATION ====================
-const int FORWARD_SPEED = 0;  // Start with 0 (motors off for initial testing)
+const int FORWARD_SPEED = 150;  // Start with 0 (motors off for initial testing)
                               // Increase to 80-120 once steering works
 
 // ==================== OBJECTS ====================
