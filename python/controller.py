@@ -1,3 +1,10 @@
+try:
+    from config import ARDUINO_PORT, ARDUINO_BAUD_RATE
+except ModuleNotFoundError:
+    from python.config import ARDUINO_PORT, ARDUINO_BAUD_RATE
+import serial
+import time
+
 class ArduinoController:
     """
     Interface for sending commands to Arduino RC car.

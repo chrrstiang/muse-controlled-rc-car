@@ -5,8 +5,13 @@ Sends steering commands via USB serial connection.
 """
 
 import time
-from config import ARDUINO_PORT
-from controller import ArduinoController
+import sys
+import os
+
+# Add parent directory to path so we can import python modules
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from python.config import ARDUINO_PORT, ARDUINO_BAUD_RATE
+from python.controller import ArduinoController
 
 
 def test_steering():
@@ -17,7 +22,7 @@ def test_steering():
     print("(Update ARDUINO_PORT in config.py if this fails)\n")
     
     try:
-        arduino = ArduinoController(port=ARDUINO_PORT)
+        arduino = ArduinoController(port=ARDUINO_PORT, baud_rate=ARDUINO_BAUD_RATE)
     except Exception as e:
         print(f"\nConnection failed: {e}")
         print("\nSteps to fix:")

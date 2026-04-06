@@ -34,5 +34,5 @@ TRANSITION_TIME = 0.5  # Seconds to transition
 
 # Arduino
 ARDUINO_PORT = '/dev/cu.usbserial-110'
-ARDUINO_BAUD_RATE = 57600
+ARDUINO_BAUD_RATE = 115200
 
