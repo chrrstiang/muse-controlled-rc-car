@@ -1,4 +1,4 @@
-muse-lsl
+muselsl
 pylsl
 numpy
 scipy
