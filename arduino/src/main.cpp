@@ -2,19 +2,20 @@
 #include <Servo.h>
 
 // ==================== PIN CONFIGURATION ====================
-// Steering servo
-#define SERVO_PIN 7
+// Steering servo — moved to pin 4 (pin 7 is used by motor IN1)
+#define SERVO_PIN 4
 
-// Motor driver (L298N) - verify these match your ELEGOO wiring
-#define MOTOR_ENA 3   // Left motor speed (PWM)
-#define MOTOR_IN1 5   // Left motor direction
-#define MOTOR_IN2 6   // Left motor direction
-#define MOTOR_ENB 11  // Right motor speed (PWM)
+// Motor driver (TB6612FNG) - Elegoo Smart Car V4 pin mapping
+#define MOTOR_ENA 5   // Left motor speed (PWM)
+#define MOTOR_IN1 7   // Left motor direction
+#define MOTOR_IN2 8   // Left motor direction
+#define MOTOR_ENB 6   // Right motor speed (PWM)
 #define MOTOR_IN3 9   // Right motor direction
-#define MOTOR_IN4 10  // Right motor direction
+#define MOTOR_IN4 11  // Right motor direction
+#define MOTOR_STBY 3  // TB6612 standby pin — must be HIGH to enable motors
 
 // ==================== CONFIGURATION ====================
-const int FORWARD_SPEED = 150;  // Start with 0 (motors off for initial testing)
+const int FORWARD_SPEED = 50;  // Start with 0 (motors off for initial testing)
                               // Increase to 80-120 once steering works
 
 // ==================== OBJECTS ====================
@@ -45,7 +46,11 @@ void setup() {
     pinMode(MOTOR_IN4, OUTPUT);
     pinMode(MOTOR_ENA, OUTPUT);
     pinMode(MOTOR_ENB, OUTPUT);
-    
+    pinMode(MOTOR_STBY, OUTPUT);
+
+    // Enable TB6612 (pull standby HIGH)
+    digitalWrite(MOTOR_STBY, HIGH);
+
     // Initialize motors (stopped)
     digitalWrite(MOTOR_IN1, LOW);
     digitalWrite(MOTOR_IN2, LOW);
@@ -137,11 +142,11 @@ void handleThrottleCommand(String command) {
     int state = stateStr.toInt();
     
     if (state == 1) {
-        // Forward
+        // Forward — Elegoo shield inverts right channel internally, HIGH/HIGH on both = forward
         digitalWrite(MOTOR_IN1, HIGH);
-        digitalWrite(MOTOR_IN2, LOW);
+        digitalWrite(MOTOR_IN2, HIGH);
         digitalWrite(MOTOR_IN3, HIGH);
-        digitalWrite(MOTOR_IN4, LOW);
+        digitalWrite(MOTOR_IN4, HIGH);
         analogWrite(MOTOR_ENA, FORWARD_SPEED);
         analogWrite(MOTOR_ENB, FORWARD_SPEED);
         
@@ -155,6 +160,18 @@ void handleThrottleCommand(String command) {
         
         currentThrottle = 0;
         Serial.println("OK: Throttle = STOP");
+        
+    } else if (state == 2) {
+        // Reverse
+        digitalWrite(MOTOR_IN1, LOW);
+        digitalWrite(MOTOR_IN2, LOW);
+        digitalWrite(MOTOR_IN3, LOW);
+        digitalWrite(MOTOR_IN4, LOW);
+        analogWrite(MOTOR_ENA, FORWARD_SPEED);
+        analogWrite(MOTOR_ENB, FORWARD_SPEED);  
+        
+        currentThrottle = 2;
+        Serial.println("OK: Throttle = REVERSE");
         
     } else {
         Serial.print("ERROR: Invalid throttle state: ");
