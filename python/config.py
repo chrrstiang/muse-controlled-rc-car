@@ -13,7 +13,7 @@ Modify these values to tune system behavior without changing core logic.
 
 # Muse device & address, change this to your device if using a different one. Run muselsl list to find your device.
 MUSE_DEVICE_NAME = "Muse-DF97"
-MAC_ADDRESS = "2B4C914C-27D1-Okay it's B83C-2547-678EB30BA1E4"
+MAC_ADDRESS = "2B4C914C-27D1-B83C-2547-678EB30BA1E4"
 
 # Focus detection thresholds (alpha/beta ratio cutoffs)
 FOCUS_THRESHOLD = 0.85

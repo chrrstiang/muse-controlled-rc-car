@@ -41,12 +41,14 @@ def run_training_session(session_name, trials):
         print(f"Task: {trial['notes']}")
         
         input("Press Enter when ready to start...")
-        
-        # Record trial
-        filename_prefix = f"eeg_{trial['type']}_trial_{i}"
+
+        # Record trial. Label = "<type>_trial<i>" so each trial's data is
+        # tagged by task and never collides, and stays replay-compatible.
         record_session(
             duration=trial['duration'],
-            output_dir=session_dir
+            output_dir=session_dir,
+            notes=trial['notes'],
+            label=f"{trial['type']}_trial{i}"
         )
         
         print(f"Trial {i} complete!")

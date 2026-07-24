@@ -58,11 +58,8 @@ def compute_abr(eeg_data, fs=SAMPLING_RATE):
         beta_power: Beta band power
     """
     alpha_power = calculate_band_power(eeg_data, fs, band_range='alpha')
-    print(f"Alpha Power: {alpha_power}")
-
     beta_power = calculate_band_power(eeg_data, fs, band_range='beta')
-    print("Beta Power: ", beta_power)
-    
+
     abr = alpha_power / beta_power if beta_power > 0 else 0
     
     return abr, alpha_power, beta_power

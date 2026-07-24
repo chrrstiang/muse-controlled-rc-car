@@ -17,13 +17,17 @@ import os
 from signal_processing import calculate_band_power, plot_raw_eeg
 
 def load_eeg_data(filename):
-    """Load EEG data from CSV file."""
-    if not os.path.exists(f'data/recordings/training/training_001/{filename}'):
-        print(f"Error: File {filename} not found!")
-        return None
-    
-    df = pd.read_csv(f'data/recordings/training/training_001/{filename}')
-    return df
+    """Load EEG data from a CSV file.
+
+    Accepts a direct path (absolute or relative to cwd). For backward
+    compatibility, also tries the legacy training_001 directory.
+    """
+    candidates = [filename, f'data/recordings/training/training_001/{filename}']
+    for path in candidates:
+        if os.path.exists(path):
+            return pd.read_csv(path)
+    print(f"Error: File {filename} not found (looked in: {', '.join(candidates)})")
+    return None
 
 def print_basic_stats(df, sampling_rate=256):
     """Print basic statistics about the EEG data."""

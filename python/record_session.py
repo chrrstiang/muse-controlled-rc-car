@@ -8,22 +8,27 @@ from datetime import datetime
 import csv
 import os
 
-def record_session(duration=None, output_dir='data/recordings', notes=''):
+def record_session(duration=None, output_dir='data/recordings', notes='', label=''):
     """
     Record EEG and gyroscope data to CSV files.
-    
+
     Args:
         duration: Recording duration in seconds (None = until Ctrl+C)
         output_dir: Directory to save recordings
         notes: Optional notes for this recording session
+        label: Optional label embedded in the filename (e.g. 'focus', 'unfocus').
+               Produces eeg_<label>_<timestamp>.csv so trial type is preserved and
+               files never collide. The eeg_*/acc_* prefixes stay intact so
+               replay_stream.py still pairs them.
     """
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
-    
+
     # Generate timestamp for filenames
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    eeg_filename = f'{output_dir}/eeg_{timestamp}.csv'
-    acc_filename = f'{output_dir}/acc_{timestamp}.csv'
+    tag = f'{label}_{timestamp}' if label else timestamp
+    eeg_filename = f'{output_dir}/eeg_{tag}.csv'
+    acc_filename = f'{output_dir}/acc_{tag}.csv'
     
     # Save notes to metadata file if provided
     if notes:
@@ -102,6 +107,9 @@ if __name__ == "__main__":
                        help='Output directory')
     parser.add_argument('--notes', type=str, default='',
                        help='Optional notes for this recording session')
-    
+    parser.add_argument('--label', type=str, default='',
+                       help="Optional label for the filename (e.g. 'focus', 'unfocus')")
+
     args = parser.parse_args()
-    record_session(duration=args.duration, output_dir=args.output, notes=args.notes)
+    record_session(duration=args.duration, output_dir=args.output,
+                   notes=args.notes, label=args.label)

@@ -3,8 +3,14 @@ Pre-flight system check.
 Verifies all components are working before running BCI controller.
 """
 
-from pylsl import resolve_byprop, StreamInlet
+import os
+import sys
 import time
+
+from pylsl import resolve_byprop, StreamInlet
+
+# Add repo root to path so we can import the python/ modules (matches manual_control.py)
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 def check_eeg_stream():
     """Check if EEG stream is available."""
@@ -49,10 +55,10 @@ def check_arduino():
     print("Checking Arduino connection...", end=' ')
     
     try:
-        from serial_comm import ArduinoController
-        from config import SERIAL_PORT, BAUD_RATE
-        
-        arduino = ArduinoController(port=SERIAL_PORT, baud_rate=BAUD_RATE)
+        from python.controller import ArduinoController
+        from python.config import ARDUINO_PORT, ARDUINO_BAUD_RATE
+
+        arduino = ArduinoController(port=ARDUINO_PORT, baud_rate=ARDUINO_BAUD_RATE)
         arduino.close()
         print("✓ CONNECTED")
         return True
